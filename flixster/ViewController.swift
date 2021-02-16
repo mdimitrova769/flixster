@@ -11,10 +11,7 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
-    
-    
-    
-    
+
     var movies = [[String:Any]]() //array of dictionaries
 
     override func viewDidLoad() {
@@ -22,9 +19,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-        
-        
-        print("Hello")
         
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
@@ -75,5 +69,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        print("Loading up the details screen here")
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for:cell)!
+        let movie = movies[indexPath.row]
+        
+      let detailsViewController = segue.destination as! MovieDetailsViewController
+        
+       detailsViewController.movie = movie 
+        
+        
+        
+    }
+    
+    
+    
 }
 
